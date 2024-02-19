@@ -34,7 +34,7 @@
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
         <div class="container">
             <a class="navbar-brand" href="./"><img src="resource/logo.png" class="img-fluid rounded logo-img mr-2"
-                    alt="LOGO" /> PanDownload</a>
+                    alt="LOGO" /> 逍遥小站</a>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
                 data-bs-target="#collpase-bar"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="collpase-bar">
@@ -42,8 +42,8 @@
                     <li class="nav-item"><a class="nav-link" href="javascript:navigate('index')">首页</a></li>
                     <li class="nav-item"><a class="nav-link" href="javascript:navigate('help')">使用帮助</a></li>
                     <li class="nav-item"><a class="nav-link" href="javascript:navigate('usersettings')">用户设置</a></li>
-                    <li class="nav-item"><a class="nav-link" href="https://github.com/yuantuo666/baiduwp-php"
-                            target="_blank">Github</a></li>
+                    <li class="nav-item"><a class="nav-link" href="https://www.bilibili.com/video/BV1UP41167KK"
+                            target="_blank">B站视频教程</a></li>
                     <li class="nav-item" style="flex-grow: 1;"></li>
                     <li class="nav-item"><a class="nav-link" href="./admin" target="_blank">管理后台</a></li>
                 </ul>
@@ -317,7 +317,7 @@
                         <option value="true">
                             启用
                         </option>
-                        <option value="false">
+                        <option value="false" selected>
                             禁用
                         </option>
                     </select>
@@ -460,10 +460,11 @@
                                     <li>当前项目版本：
                                         <?= $program_version ?>
                                     </li>
-                                    <li><a href="https://github.com/yuantuo666/baiduwp-php" target="_blank">Github仓库</a>
-                                    </li>
-                                    <li>项目作者：<a href="https://imwcr.cn/" target="_blank">Yuan_Tuo</a></li>
-                                    <li>项目协作者：<a href="https://lcwebsite.cn/" target="_blank">LC</a></li>
+                                    <!--隐藏版权-->
+                                    <!--<li><a href="https://github.com/yuantuo666/baiduwp-php" target="_blank">Github仓库</a>-->
+                                    <!--</li>-->
+                                    <!--<li>项目作者：<a href="https://imwcr.cn/" target="_blank">Yuan_Tuo</a></li>-->
+                                    <!--<li>项目协作者：<a href="https://lcwebsite.cn/" target="_blank">LC</a></li>-->
                                 </ol>
                             </section>
                             <script>
@@ -476,6 +477,40 @@
                 </div>
             </div>
         </div>
+        <!-- 底部赞助区域 -->
+            <div style="padding: 20px 10%; text-align: center;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="flex: 1;">
+                        <img src="https://cdn.jsdelivr.net/gh/H-Bole/Picture-home/Payment/wxdonation.png" style="max-width: 100%; height: auto;" alt="赞助图片">
+                    </div>
+                    <div style="flex: 3; text-align: center;">
+                        <h2 style="margin-bottom: 10px; font-size: 1.2em;">赞助维持小站运行</h2>
+                        <p style="margin-bottom: 20px; font-size: 1em; color: #666;">由于网站运营成本较高，我需要您的赞助以维持网站的正常运行。<br>
+                            价格：0.2￥最低可使用1天（5次），6.66￥解锁月会员<br>
+                            下次修改密码最少还剩：<span id="countdown"></span></p>
+                    </div>
+                </div>
+                <a style="display: inline-block; padding: 10px 20px; background-color: orange; color: #fff; text-decoration: none; border-radius: 5px; transition: background-color 0.3s ease;" href="http://buy.xiaoyaostation.xyz/" target="_blank">跳转赞助获取密码</a>
+            </div>
+            <script>
+                // 倒计时
+                function updateCountdown() {
+                    var now = new Date();
+                    var end = new Date(now);
+                    end.setHours(24, 0, 0, 0); // 设置为下一个零点
+                    var remaining = (end - now) / 1000; // 剩余秒数
+                    var hours = Math.floor(remaining / 3600);
+                    var minutes = Math.floor((remaining % 3600) / 60);
+                    document.getElementById('countdown').textContent = hours + '小时' + minutes + '分钟';
+                }
+                
+                // 初始化倒计时
+                updateCountdown();
+                
+                // 每秒更新一次倒计时
+                setInterval(updateCountdown, 1000);
+            </script>
+
     </div>
     <div style="position: fixed; bottom: 5px; left: 5px;">
         <?=$footer?>
