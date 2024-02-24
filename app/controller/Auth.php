@@ -70,17 +70,21 @@ class Auth extends BaseController
         }
 
         // 返回已登录状态
-        return json([
-            'status' => 2,
-            'msg' => '已登录',
-        ]);
+        if($card['is_invalid'] === 'no'){
+            return json([
+                'status' => 2,
+                'msg' => '已登录',
+            ]);
+        }
     }
 
     public static function checkPassword(Request $request)
     {
         // 获取用户输入的密码
-        $pwd = $request->post('password');
-
+        $pwd = session('Password');
+        if (!$pwd) {
+            $pwd = $request->post('password');
+        }
         // 查询卡密表是否存在用户输入的卡密
         $card = Db::name('cards')->where('card_value', $pwd)->find();
 
@@ -116,10 +120,11 @@ class Auth extends BaseController
 
         // 更新已使用次数
         Db::name('cards')->where('id', $card['id'])->inc('used_times')->update();
-
-        // 将卡密写入会话，标记用户已登录
-        session('Password', $pwd);
-
-        return true;
+        
+        // 如果卡密有效，将卡密写入会话，标记用户已登录
+        if ($card['is_invalid'] === 'no') {
+            session('Password', $pwd);
+            return true;
+        }
     }
 }
