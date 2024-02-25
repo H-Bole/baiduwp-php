@@ -118,8 +118,8 @@ class Auth extends BaseController
             }
         }
 
-        // 更新已使用次数
-        Db::name('cards')->where('id', $card['id'])->inc('used_times')->update();
+        // // 更新已使用次数
+        // Db::name('cards')->where('id', $card['id'])->inc('used_times')->update();
         
         // 如果卡密有效，将卡密写入会话，标记用户已登录
         if ($card['is_invalid'] === 'no') {

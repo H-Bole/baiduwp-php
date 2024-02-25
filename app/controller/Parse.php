@@ -5,6 +5,7 @@ namespace app\controller;
 use app\BaseController;
 use app\Request;
 use app\Parse as GlobalParse;
+use think\facade\Db;
 
 class Parse extends BaseController
 {
@@ -33,7 +34,11 @@ class Parse extends BaseController
         $randsk = $request->post('randsk', '');
         $shareid = $request->post('shareid', '');
         $uk = $request->post('uk', '');
-
+        $pwd = session('Password');
+        // 查询卡密表是否存在用户输入的卡密
+        $card = Db::name('cards')->where('card_value', $pwd)->find();
+        // 更新已使用次数
+        Db::name('cards')->where('id', $card['id'])->inc('used_times')->update();
         $result = GlobalParse::download($fs_id, $timestamp, $sign, $randsk, $shareid, $uk);
         return json($result);
     }
