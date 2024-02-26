@@ -478,38 +478,130 @@
             </div>
         </div>
         <!-- 底部赞助区域 -->
-            <div style="padding: 20px 10%; text-align: center;">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <div style="flex: 1;">
-                        <img src="https://cdn.jsdelivr.net/gh/H-Bole/Picture-home/Payment/wxdonation.png" style="max-width: 100%; height: auto;" alt="赞助图片">
-                    </div>
-                    <div style="flex: 3; text-align: center;">
-                        <h2 style="margin-bottom: 10px; font-size: 1.2em;">赞助维持小站运行</h2>
-                        <p style="margin-bottom: 20px; font-size: 1em; color: #666;">由于网站运营成本较高，我需要您的赞助以维持网站的正常运行。<br>
-                            价格：0.2￥最低可使用1天（5次），6.66￥解锁月会员<br>
-                            下次修改密码最少还剩：<span id="countdown"></span></p>
-                    </div>
+        <div style="padding: 20px 10%; text-align: center;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div style="flex: 3; text-align: center;">
+                    <h2 style="margin-bottom: 10px; font-size: 1.2em;">赞助支持小站</h2>
+                    <p style="margin-bottom: 20px; font-size: 1em; color: #666;">您的赞助是小站持续运营的动力！<br>
+                        现有套餐：
+                        <ul style="list-style: none; padding-left: 0;">
+                            <li>0.5￥ - 5次（一天有效期）</li>
+                            <li>0.88￥ - 10次（3天有效期）</li>
+                            <li>4.28￥ - 50次（10天有效期）</li>
+                            <li>8￥ - 100次（20天有效期）</li>
+                        </ul>
+                        Tips：有效期开始时间为卡密第一次在网站使用时
+                    </p>
                 </div>
-                <a style="display: inline-block; padding: 10px 20px; background-color: orange; color: #fff; text-decoration: none; border-radius: 5px; transition: background-color 0.3s ease;" href="http://buy.xiaoyaostation.xyz/" target="_blank">跳转赞助获取密码</a>
             </div>
-            <script>
-                // 倒计时
-                function updateCountdown() {
-                    var now = new Date();
-                    var end = new Date(now);
-                    end.setHours(24, 0, 0, 0); // 设置为下一个零点
-                    var remaining = (end - now) / 1000; // 剩余秒数
-                    var hours = Math.floor(remaining / 3600);
-                    var minutes = Math.floor((remaining % 3600) / 60);
-                    document.getElementById('countdown').textContent = hours + '小时' + minutes + '分钟';
+            <a style="display: inline-block; padding: 10px 20px; background-color: orange; color: #fff; text-decoration: none; border-radius: 5px; transition: background-color 0.3s ease;" href="http://buy.xiaoyaostation.xyz/" target="_blank">进行赞助获得卡密</a>
+        </div>
+
+        <!-- 网站稳定运行时间计时器 -->
+        <div style="text-align: center; padding: 10px;">
+            <p style="font-size: 1em; color: #666; margin-bottom: 5px;">网站已稳定运行：</p>
+            <p id="uptime" style="font-size: 1.2em; font-weight: bold; color: #333;"></p>
+        </div>
+
+        <!-- 服务器选择 -->
+        <div style="text-align: center;  padding: 20px;">
+            <h2 style="font-size: 1.3em; color: #333; margin-bottom: 15px;">当前站点：</h2>
+            <p id="currentSite" style="font-size: 1.1em; font-weight: bold; color: #555; margin-bottom: 15px;"></p>
+            <h2 style="font-size: 1.3em; color: #333; margin-bottom: 15px;">其他站点：</h2>
+            <ul style="list-style: none; padding-left: 0; display: flex; justify-content: center;">
+                <li style="margin-right: 20px;"><a id="site1" href="http://first.xiaoyaostation.xyz/" style="font-size: 1em; color: #007bff; text-decoration: none;">一号站点</a></li>
+                <li style="margin-right: 20px;"><a id="site2" href="http://second.xiaoyaostation.xyz/" style="font-size: 1em; color: #007bff; text-decoration: none;">二号站点</a></li>
+                <li style="margin-right: 20px;"><a id="site3" href="http://third.xiaoyaostation.xyz/" style="font-size: 1em; color: #007bff; text-decoration: none;">三号站点</a></li>
+                <li><a id="vipSite" href="http://vip.xiaoyaostation.xyz/" style="font-size: 1em; color: #007bff; text-decoration: none;">VIP站点</a></li>
+            </ul>
+        </div>
+
+        <script>
+            // 计算网站稳定运行时间
+            function calculateUptime() {
+                var now = new Date();
+                var startDate = new Date("2023-07-08T00:00:00"); // 修改为网站上线日期
+                var uptimeMilliseconds = now - startDate;
+
+                // 计算年份
+                var years = Math.floor(uptimeMilliseconds / (1000 * 60 * 60 * 24 * 365.25));
+                uptimeMilliseconds -= years * (1000 * 60 * 60 * 24 * 365.25);
+
+                // 计算月份
+                var months = Math.floor(uptimeMilliseconds / (1000 * 60 * 60 * 24 * 30.44));
+                uptimeMilliseconds -= months * (1000 * 60 * 60 * 24 * 30.44);
+
+                // 计算天数
+                var days = Math.floor(uptimeMilliseconds / (1000 * 60 * 60 * 24));
+                uptimeMilliseconds -= days * (1000 * 60 * 60 * 24);
+
+                // 计算小时数
+                var hours = Math.floor(uptimeMilliseconds / (1000 * 60 * 60));
+                uptimeMilliseconds -= hours * (1000 * 60 * 60);
+
+                // 计算分钟数
+                var minutes = Math.floor(uptimeMilliseconds / (1000 * 60));
+
+                // 构造稳定运行时间字符串
+                var uptimeString = "";
+                if (years > 0) {
+                    uptimeString += years + "年 ";
                 }
-                
-                // 初始化倒计时
-                updateCountdown();
-                
-                // 每秒更新一次倒计时
-                setInterval(updateCountdown, 1000);
-            </script>
+                if (months > 0) {
+                    uptimeString += months + "个月 ";
+                }
+                if (days > 0) {
+                    uptimeString += days + "天 ";
+                }
+                if (hours > 0) {
+                    uptimeString += hours + "小时 ";
+                }
+                if (minutes > 0 || uptimeString === "") {
+                    uptimeString += minutes + "分钟";
+                }
+
+                document.getElementById('uptime').textContent = uptimeString;
+            }
+
+            // 初始化网站稳定运行时间
+            calculateUptime();
+
+            // 每分钟更新一次稳定运行时间
+            setInterval(calculateUptime, 60000);
+
+            // 检测当前站点
+            function detectCurrentSite() {
+                var currentDomain = window.location.hostname;
+                var siteName = "";
+
+                switch (currentDomain) {
+                    case "first.xiaoyaostation.xyz":
+                        siteName = "一号站点";
+                        break;
+                    case "second.xiaoyaostation.xyz":
+                        siteName = "二号站点";
+                        break;
+                    case "third.xiaoyaostation.xyz":
+                        siteName = "三号站点";
+                        break;
+                    case "vip.xiaoyaostation.xyz":
+                        siteName = "VIP站点";
+                        break;
+                    default:
+                        siteName = "未知站点";
+                        break;
+                }
+
+                document.getElementById('currentSite').textContent = siteName;
+            }
+
+            // 初始化当前站点
+            detectCurrentSite();
+        </script>
+
+
+
+
 
     </div>
     <div style="position: fixed; bottom: 5px; left: 5px;">
