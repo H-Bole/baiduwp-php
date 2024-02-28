@@ -275,6 +275,7 @@ async function getAPI(method) { // 获取 API 数据
 function navigate(path) {
 	if (path && path.substring(0, 1) === "/") path = path.substring(1);
 	$("#index").hide();
+	$("#sponsor").hide();
 	$("#list").hide();
 	$("#help").hide();
 	$("#usersettings").hide();
