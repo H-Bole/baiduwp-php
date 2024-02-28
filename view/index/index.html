@@ -28,6 +28,59 @@
     <script src="static/color.js?v=<?= $program_version ?>"></script>
     <script src="static/functions.js?v=<?= $program_version ?>"></script>
     <script async="false" src="static/ready.js?v=<?= $program_version ?>"></script>
+    <style>
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 40px auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background-color: #ddd;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1px;
+        }
+
+        .event {
+            padding: 10px 20px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+
+        .event.left {
+            left: 0;
+        }
+
+        .event.right {
+            left: 50%;
+        }
+
+        .content {
+            padding: 20px;
+            background-color: white;
+            position: relative;
+            border-radius: 6px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        @media screen and (max-width: 600px) {
+            .event,
+            .event.right {
+                width: 100%;
+                left: 0;
+            }
+
+            .timeline::after {
+                left: 40px;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -40,11 +93,11 @@
             <div class="collapse navbar-collapse" id="collpase-bar">
                 <ul class="navbar-nav" style="width: 100%;">
                     <li class="nav-item"><a class="nav-link" href="javascript:navigate('index')">首页</a></li>
+                    <li class="nav-item"><a class="nav-link" href="javascript:navigate('sponsor')">赞助公告</a></li>
                     <li class="nav-item"><a class="nav-link" href="javascript:navigate('help')">使用帮助</a></li>
                     <li class="nav-item"><a class="nav-link" href="javascript:navigate('usersettings')">用户设置</a></li>
                     <li class="nav-item"><a class="nav-link" href="https://www.bilibili.com/video/BV1UP41167KK"
                             target="_blank">B站视频教程</a></li>
-                    <li class="nav-item" style="flex-grow: 1;"></li>
                     <li class="nav-item"><a class="nav-link" href="./admin" target="_blank">管理后台</a></li>
                 </ul>
             </div>
@@ -477,32 +530,123 @@
                 </div>
             </div>
         </div>
-        <!-- 底部赞助区域 -->
-        <div style="padding: 20px 10%; text-align: center;">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <div style="flex: 3; text-align: center;">
-                    <h2 style="margin-bottom: 10px; font-size: 1.2em;">赞助支持小站</h2>
-                    <p style="margin-bottom: 20px; font-size: 1em; color: #666;">您的赞助是小站持续运营的动力！<br>
-                        现有套餐：
-                        <ul style="list-style: none; padding-left: 0;">
-                            <li>0.5￥ - 5次（一天有效期）</li>
-                            <li>0.88￥ - 10次（3天有效期）</li>
-                            <li>4.28￥ - 50次（10天有效期）</li>
-                            <li>8￥ - 100次（20天有效期）</li>
-                        </ul>
-                        Tips：有效期开始时间为卡密第一次在网站使用时
-                    </p>
+        <!-- 赞助公告分页 -->
+        <div id="sponsor" class="page" style="display: none;">
+            <!-- 底部赞助区域 -->
+            <div style="padding: 20px 10%; text-align: center;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="flex: 3; text-align: center;">
+                        <h2 style="margin-bottom: 10px; font-size: 1.2em;">赞助支持小站</h2>
+                        <p style="margin-bottom: 20px; font-size: 1em; color: #666;">您的赞助是小站持续运营的动力！<br>
+                            现有套餐：
+                            <ul style="list-style: none; padding-left: 0;">
+                                <li>基础赞助0.5￥ - 5次（7天有效期）</li>
+                                <li>初级赞助0.88￥ - 10次（15天有效期）</li>
+                                <li>中级赞助4.28￥ - 50次（30天有效期）</li>
+                                <li>高级赞助8￥ - 100次（60天有效期）</li>
+                            </ul>
+                            Tips：有效期开始时间为卡密第一次在网站使用时
+                        </p>
+                    </div>
                 </div>
+                <a style="display: inline-block; padding: 10px 20px; background-color: orange; color: #fff; text-decoration: none; border-radius: 5px; transition: background-color 0.3s ease;" href="http://buy.xiaoyaostation.xyz/" target="_blank">进行赞助获得卡密</a>
             </div>
-            <a style="display: inline-block; padding: 10px 20px; background-color: orange; color: #fff; text-decoration: none; border-radius: 5px; transition: background-color 0.3s ease;" href="http://buy.xiaoyaostation.xyz/" target="_blank">进行赞助获得卡密</a>
+            <div class="timeline">
+                <!-- 2023/7/10 第一个服务器被DDoS攻击导致关停 -->
+                <div class="event left">
+                    <div class="content">
+                        <h2>2023/7/10</h2>
+                        <p>第一个服务器被DDoS攻击导致关停。</p>
+                    </div>
+                </div>
+            
+                <!-- 2023/7/11 第二个服务器架设完成 -->
+                <div class="event right">
+                    <div class="content">
+                        <h2>2023/7/11</h2>
+                        <p>第二个服务器架设完成。</p>
+                    </div>
+                </div>
+                
+                <!-- 2023/7/30 服务器实现域名访问 -->
+                <div class="event left">
+                    <div class="content">
+                        <h2>2023/7/30</h2>
+                        <p>服务器实现域名访问。</p>
+                    </div>
+                </div>
+            
+                <!-- 2023/8/10 VIP服务器架设完成 -->
+                <div class="event right">
+                    <div class="content">
+                        <h2>2023/8/10</h2>
+                        <p>VIP服务器架设完成。</p>
+                    </div>
+                </div>
+            
+                <!-- 2023/11/2 原有服务器搬迁完成，架设第三个服务器 -->
+                <div class="event left">
+                    <div class="content">
+                        <h2>2023/11/2</h2>
+                        <p>原有服务器搬迁完成，架设第三个服务器。</p>
+                    </div>
+                </div>
+            
+                <!-- 2024/2/06 实现域名不加端口号访问 -->
+                <div class="event right">
+                    <div class="content">
+                        <h2>2024/2/06</h2>
+                        <p>实现域名不加端口号访问。</p>
+                    </div>
+                </div>
+            
+                <!-- 2023/2/07 卡密系统初步构思完成 -->
+                <div class="event left">
+                    <div class="content">
+                        <h2>2023/2/07</h2>
+                        <p>卡密系统初步构思完成。</p>
+                    </div>
+                </div>
+            
+                <!-- 2024/2/14 服务器版本升级为4.0.3 -->
+                <div class="event right">
+                    <div class="content">
+                        <h2>2024/2/14</h2>
+                        <p>服务器版本升级为4.0.3。</p>
+                    </div>
+                </div>
+            
+                <!-- 2024/2/16 发卡网架设完成并上线 -->
+                <div class="event left">
+                    <div class="content">
+                        <h2>2024/2/16</h2>
+                        <p>发卡网架设完成并上线。</p>
+                    </div>
+                </div>
+            
+                <!-- 2024/2/25 卡密系统研发完成 -->
+                <div class="event right">
+                    <div class="content">
+                        <h2>2024/2/25</h2>
+                        <p>卡密系统研发完成。</p>
+                    </div>
+                </div>
+            
+                <!-- 2024/2/26 卡密系统全量上线 -->
+                <div class="event left">
+                    <div class="content">
+                        <h2>2024/2/26</h2>
+                        <p>卡密系统全量上线。</p>
+                    </div>
+                </div>
+            
+            </div>
         </div>
-
         <!-- 网站稳定运行时间计时器 -->
         <div style="text-align: center; padding: 10px;">
             <p style="font-size: 1em; color: #666; margin-bottom: 5px;">网站已稳定运行：</p>
             <p id="uptime" style="font-size: 1.2em; font-weight: bold; color: #333;"></p>
         </div>
-
         <!-- 服务器选择 -->
         <div style="text-align: center;  padding: 20px;">
             <h2 style="font-size: 1.3em; color: #333; margin-bottom: 15px;">当前站点：</h2>
